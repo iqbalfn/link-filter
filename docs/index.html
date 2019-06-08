@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/themes/prism.min.css">
+
+    <title>Link Filter</title>
+
+    <style>
+        h1{ margin-top: 80px; }
+        h2,h3{ margin-top: 40px; }
+        .example{ border: 4px solid #eee; margin-bottom:30px;}
+        .example-preview{ padding: 1.5rem; }
+        .example > pre{ border-top: 4px solid #eee;margin:0; }
+        .highlihgt-grid .row + .row{ margin-top: 1rem;}
+        .highlihgt-grid [class^="col-"]{
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            background-color: rgba(86,61,124,.15);
+            border: 1px solid rgba(86,61,124,.2);
+        }
+    </style>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-1746437125043617",
+              enable_page_level_ads: true
+         });
+    </script>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+        <a class="navbar-brand" href="#">Link Filter</a>
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/iqbalfn/link-filter">Github</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/iqbalfn/link-filter/archive/master.zip">Download</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <h1>Link Filter</h1>
+                <p class="lead">Super simple plugin to filter ( show/hide ) list of links based on some input element value.</p>
+
+                <section>
+                    <h2>Overview</h2>
+                    <p>Filtering the list is done on every user <code>keyup</code> event with delay 300ms. The not match element will not removed from DOM, they only invisible to user by style <code>display:none</code> css.</p>
+                    <p>If the related <code>input</code> has no value, all the item inside the list will be shown.</p>
+                    <p>Pressing key <code>UP</code> or <code>DOWN</code> on your keyboard will add class <code>active</code> to some of the list child. While pressing <code>ENTER</code> will trigger <code>click</code> event to the first <code>&lt;a&gt;</code> of list child.</p>
+                </section>
+
+                <section>
+                    <h2>Examples</h2>
+
+                    <article>
+                        <section>
+                            <h3>Filter</h3>
+                            <article>
+                                <p>The example below will hide all element that don't match the text inside the links list.</p>
+                                <div class="example">
+                                    <div class="example-preview source-code" data-hl="html">
+                                        <div class="form-group">
+                                            <input type="search" class="form-control" placeholder="Find your bookmarks" id="input-1" autocomplete="off">
+                                        </div>
+                                        <div class="list-group" id="list-1">
+                                            <a href="#" class="list-group-item list-group-item-action">Facebook</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Google</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Instagram</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Telegram</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Twitter</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Yahoo!</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Whatsapp</a>
+                                        </div>
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function(){
+                                                $('#list-1').linkfilter({
+                                                    input: '#input-1'
+                                                })
+                                            })
+                                        </script>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+
+                        <section>
+                            <h3>Non Direct Link</h3>
+                            <article>
+                                <p>It for sure allow list with direct child is not a link, the <code>Enter</code> action will click the first child of the list child that is an <code>&lt;a&gt;</code>.</p>
+                                <div class="example">
+                                    <div class="example-preview source-code" data-hl="html">
+                                        <div class="form-group">
+                                            <input type="search" class="form-control" placeholder="Find your bookmarks" id="input-2" autocomplete="off">
+                                        </div>
+                                        <ul class="list-group" id="list-2">
+                                              <li class="list-group-item"><a href="#">Facebook</a></li>
+                                              <li class="list-group-item"><a href="#">Google</a></li>
+                                              <li class="list-group-item"><a href="#">Instagram</a></li>
+                                              <li class="list-group-item"><a href="#">Telegram</a></li>
+                                              <li class="list-group-item"><a href="#">Twitter</a></li>
+                                              <li class="list-group-item"><a href="#">Yahoo!</a></li>
+                                              <li class="list-group-item"><a href="#">Whatsapp</a></li>
+                                        </ul>
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function(){
+                                                $('#list-2').linkfilter({
+                                                    input: '#input-2'
+                                                })
+                                            })
+                                        </script>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+                    </article>
+                </section>
+
+                <section>
+                    <h2>Usage</h2>
+
+                    <article>
+
+                        <section>
+                            <h3>Via data attribute</h3>
+                            <article>
+                                <p>The option can be passed by data attribute as in <code>data-input="#..."</code>. But you still need to call it with JavaScript.</p>
+
+                                <div class="example">
+                                    <div class="example-preview source-code" data-hl="html">
+                                        <div class="form-group">
+                                            <input type="search" class="form-control" placeholder="Find your bookmarks" id="input-3" autocomplete="off">
+                                        </div>
+                                        <div class="list-group" id="list-3" data-input="#input-3">
+                                            <a href="#" class="list-group-item list-group-item-action">Facebook</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Google</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Instagram</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Telegram</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Twitter</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Yahoo!</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Whatsapp</a>
+                                        </div>
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function(){
+                                                $('#list-3').linkfilter()
+                                            })
+                                        </script>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+
+                        <section>
+                            <h3>Via JavaScript</h3>
+                            <article>
+                                <p>Call an element with selector with single line of JavaScript.</p>
+                                <div class="example">
+                                    <div class="example-preview source-code" data-hl="html">
+                                        <div class="form-group">
+                                            <input type="search" class="form-control" placeholder="Find your bookmarks" id="input-4" autocomplete="off">
+                                        </div>
+                                        <div class="list-group" id="list-4">
+                                            <a href="#" class="list-group-item list-group-item-action">Facebook</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Google</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Instagram</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Telegram</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Twitter</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Yahoo!</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Whatsapp</a>
+                                        </div>
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function(){
+                                                $('#list-4').linkfilter({
+                                                    input: '#input-4'
+                                                })
+                                            })
+                                        </script>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
+
+                        <section>
+                            <h3>Options</h3>
+                            <article>
+                                <p>Options can be passed via data attribute or JavaScript. For data attributes, append the option name to <code>data-</code>, as in <code>data-input="..."</code>.</p>
+
+                                <table class="table-striped table-bordered table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Type</th>
+                                            <th>Default</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>active</td>
+                                            <td>string</td>
+                                            <td>active</td>
+                                            <td>The active class to set for active link item.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>delay</td>
+                                            <td>number</td>
+                                            <td>300</td>
+                                            <td>The delay time before executing the finding action in ms.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>input</td>
+                                            <td>string</td>
+                                            <td>null</td>
+                                            <td>The input selector for finding comparation text.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </article>
+                        </section>
+                    </article>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/prism.min.js" data-manual></script>
+    <script src="js/source.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="js/link-filter.js"></script>
+    <script>
+        $('.list-group a').click(function(e){
+            alert('going to ' + this.innerText.trim())
+            return false;
+        })
+    </script>
+</body>
+</html>
