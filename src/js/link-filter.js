@@ -30,13 +30,15 @@ const RE_ESCAPE          = RegExp('[' + RE_KEYS + ']', 'g')
 const Default = {
     active      : 'active',
     delay       : 300,
-    input       : 'string'
+    input       : 'string',
+    empty       : false
 }
 
 const DefaultType = {
     active      : 'string',
     delay       : 'number',
-    input       : 'string'
+    input       : 'string',
+    empty       : 'boolean'
 }
 
 const Event = {
@@ -61,9 +63,11 @@ class LinkFilter {
         this._config                = this._getConfig(config)
         this._element               = element
         this._input                 = document.querySelector(config.input)
-        this._timer                 = null;
+        this._timer                 = null
+        this._lastQuery             = null
 
         this._addElementListener()
+        this._findItem( this._input )
     }
 
     // Getters
@@ -185,12 +189,24 @@ class LinkFilter {
         let firstItem;
         let activeFound;
 
+        if( val === this._lastQuery)
+            return
+        this._lastQuery = val;
+
         $(this._element).children().each((i,e) => {
             let eText = e.innerText
             if('text' in e.dataset)
                 eText = e.dataset.text
 
-            if(!val || re.test(eText)){
+            let show = false;
+
+            if(!val){
+                show = !this._config.empty
+            }else if(re.test(eText)){
+                show = true;
+            }
+
+            if(show){
                 found++
                 if(!firstItem)
                     firstItem = e

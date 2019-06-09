@@ -178,6 +178,36 @@
                                 </div>
                             </article>
                         </section>
+                        <section>
+                            <h3>Hide Result On No Query</h3>
+                            <article>
+                                <p>Adding option <code>empty=true</code> remove all result when no query input.</p>
+                                <div class="example">
+                                    <div class="example-preview source-code" data-hl="html">
+                                        <div class="form-group">
+                                            <input type="search" class="form-control" placeholder="Find your bookmarks" id="input-2b" autocomplete="off">
+                                        </div>
+                                        <div class="list-group" id="list-2b">
+                                            <a href="#" class="list-group-item list-group-item-action">Facebook</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Google</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Instagram</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Telegram</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Twitter</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Yahoo!</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Whatsapp</a>
+                                        </div>
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function(){
+                                                $('#list-2b').linkfilter({
+                                                    input: '#input-2b',
+                                                    empty: true
+                                                })
+                                            })
+                                        </script>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
                     </article>
                 </section>
 
@@ -271,6 +301,12 @@
                                             <td>number</td>
                                             <td>300</td>
                                             <td>The delay time before executing the finding action in ms.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>empty</td>
+                                            <td>boolean</td>
+                                            <td>false</td>
+                                            <td>Empty the result when no query search provided.</td>
                                         </tr>
                                         <tr>
                                             <td>input</td>

@@ -236,12 +236,14 @@
   var Default = {
     active: 'active',
     delay: 300,
-    input: 'string'
+    input: 'string',
+    empty: false
   };
   var DefaultType = {
     active: 'string',
     delay: 'number',
-    input: 'string'
+    input: 'string',
+    empty: 'boolean'
   };
   var Event = {
     FINDING: "finding" + EVENT_KEY + DATA_API_KEY,
@@ -267,8 +269,11 @@
       this._element = element;
       this._input = document.querySelector(config.input);
       this._timer = null;
+      this._lastQuery = null;
 
       this._addElementListener();
+
+      this._findItem(this._input);
     } // Getters
 
 
@@ -372,11 +377,20 @@
       var found = 0;
       var firstItem;
       var activeFound;
+      if (val === this._lastQuery) return;
+      this._lastQuery = val;
       $(this._element).children().each(function (i, e) {
         var eText = e.innerText;
         if ('text' in e.dataset) eText = e.dataset.text;
+        var show = false;
 
-        if (!val || re.test(eText)) {
+        if (!val) {
+          show = !_this2._config.empty;
+        } else if (re.test(eText)) {
+          show = true;
+        }
+
+        if (show) {
           found++;
           if (!firstItem) firstItem = e;
           e.classList.remove(ClassName.NOT_MATCH);
