@@ -127,6 +127,57 @@
                                 </div>
                             </article>
                         </section>
+
+                        <section>
+                            <h3>Custom Text</h3>
+                            <article>
+                                <p>If your content has so many text in it, it's better to add custom data attribute called <code>data-text</code> that keep text as a search query. By doing this, the search action will only find based on the attribute.</p>
+                                <div class="example">
+                                    <div class="example-preview source-code" data-hl="html">
+                                        <div class="form-group">
+                                            <input type="search" class="form-control" placeholder="Find your bookmarks" id="input-2a" autocomplete="off">
+                                        </div>
+                                        <div class="list-group" id="list-2a">
+                                            <a href="#" class="list-group-item list-group-item-action" data-text="Facebook">
+                                                <div>Facebook</div>
+                                                <small>facebook, google, instagram, telegram, twitter, yahoo!, whatsapp</small>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action" data-text="Google">
+                                                <div>Google</div>
+                                                <small>facebook, google, instagram, telegram, twitter, yahoo!, whatsapp</small>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action" data-text="Instagram">
+                                                <div>Instagram</div>
+                                                <small>facebook, google, instagram, telegram, twitter, yahoo!, whatsapp</small>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action" data-text="Telegram">
+                                                <div>Telegram</div>
+                                                <small>facebook, google, instagram, telegram, twitter, yahoo!, whatsapp</small>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action" data-text="Twitter">
+                                                <div>Twitter</div>
+                                                <small>facebook, google, instagram, telegram, twitter, yahoo!, whatsapp</small>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action" data-text="Yahoo!">
+                                                <div>Yahoo!</div>
+                                                <small>facebook, google, instagram, telegram, twitter, yahoo!, whatsapp</small>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action" data-text="Whatsapp">
+                                                <div>Whatsapp</div>
+                                                <small>facebook, google, instagram, telegram, twitter, yahoo!, whatsapp</small>
+                                            </a>
+                                        </div>
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function(){
+                                                $('#list-2a').linkfilter({
+                                                    input: '#input-2a'
+                                                })
+                                            })
+                                        </script>
+                                    </div>
+                                </div>
+                            </article>
+                        </section>
                     </article>
                 </section>
 
@@ -247,7 +298,10 @@
     <script src="js/link-filter.js"></script>
     <script>
         $('.list-group a').click(function(e){
-            alert('going to ' + this.innerText.trim())
+            let text = this.innerText.trim()
+            if('text' in this.dataset)
+                text = this.dataset.text
+            alert('going to ' + text)
             return false;
         })
     </script>

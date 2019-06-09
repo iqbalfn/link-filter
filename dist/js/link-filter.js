@@ -304,6 +304,7 @@
     _proto._clickActive = function _clickActive(e) {
       var el = this._element.querySelector("." + this._config.active);
 
+      if (!el) return;
       if (el.tagName != 'A') el = el.querySelector('a');
       if (el) el.click();
       e.preventDefault();
@@ -368,12 +369,19 @@
       var val = this._input.value.trim().replace(RE_ESCAPE, "\\$&");
 
       var re = new RegExp(val, 'i');
-      var found = false;
+      var found = 0;
+      var firstItem;
+      var activeFound;
       $(this._element).children().each(function (i, e) {
-        if (!val || re.test(e.innerText)) {
-          found = true;
+        var eText = e.innerText;
+        if ('text' in e.dataset) eText = e.dataset.text;
+
+        if (!val || re.test(eText)) {
+          found++;
+          if (!firstItem) firstItem = e;
           e.classList.remove(ClassName.NOT_MATCH);
           e.style.removeProperty('display');
+          if (e.classList.contains(_this2._config.active)) activeFound = true;
         } else {
           e.style.display = 'none';
           e.classList.add(ClassName.NOT_MATCH);
@@ -383,6 +391,7 @@
       var finalEvent;
 
       if (found) {
+        if (!activeFound && found === 1) firstItem.classList.add(this._config.active);
         finalEvent = $.Event(Event.FOUND, {
           relatedTarget: relatedTarget
         });

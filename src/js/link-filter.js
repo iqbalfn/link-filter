@@ -110,6 +110,8 @@ class LinkFilter {
 
     _clickActive(e){
         let el = this._element.querySelector(`.${this._config.active}`)
+        if(!el)
+            return
         if(el.tagName != 'A')
             el = el.querySelector('a')
         if(el)
@@ -179,12 +181,23 @@ class LinkFilter {
         let val = this._input.value.trim().replace(RE_ESCAPE, "\\$&")
         let re  = new RegExp(val, 'i')
 
-        let found = false;
+        let found = 0;
+        let firstItem;
+        let activeFound;
+
         $(this._element).children().each((i,e) => {
-            if(!val || re.test(e.innerText)){
-                found = true
+            let eText = e.innerText
+            if('text' in e.dataset)
+                eText = e.dataset.text
+
+            if(!val || re.test(eText)){
+                found++
+                if(!firstItem)
+                    firstItem = e
                 e.classList.remove( ClassName.NOT_MATCH)
                 e.style.removeProperty('display')
+                if(e.classList.contains(this._config.active))
+                    activeFound = true;
             }else{
                 e.style.display = 'none'
                 e.classList.add( ClassName.NOT_MATCH )
@@ -195,6 +208,8 @@ class LinkFilter {
 
         let finalEvent
         if(found){
+            if(!activeFound && found === 1)
+                firstItem.classList.add(this._config.active)
             finalEvent = $.Event(Event.FOUND, {relatedTarget})
         }else{
             finalEvent = $.Event(Event.EMPTY, {relatedTarget})
