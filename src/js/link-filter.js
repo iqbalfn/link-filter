@@ -30,14 +30,14 @@ const RE_ESCAPE          = RegExp('[' + RE_KEYS + ']', 'g')
 const Default = {
     active      : 'active',
     delay       : 300,
-    input       : 'string',
+    input       : null,
     empty       : false
 }
 
 const DefaultType = {
     active      : 'string',
     delay       : 'number',
-    input       : 'string',
+    input       : '(element|string)',
     empty       : 'boolean'
 }
 
@@ -62,9 +62,12 @@ class LinkFilter {
     constructor(element, config) {
         this._config                = this._getConfig(config)
         this._element               = element
-        this._input                 = document.querySelector(config.input)
+        this._input                 = config.input;
         this._timer                 = null
         this._lastQuery             = null
+
+        if(typeof config.input === 'string')
+            this._input = document.querySelector(config.input)
 
         this._addElementListener()
         this._findItem( this._input )

@@ -236,13 +236,13 @@
   var Default = {
     active: 'active',
     delay: 300,
-    input: 'string',
+    input: null,
     empty: false
   };
   var DefaultType = {
     active: 'string',
     delay: 'number',
-    input: 'string',
+    input: '(element|string)',
     empty: 'boolean'
   };
   var Event = {
@@ -267,9 +267,10 @@
     function LinkFilter(element, config) {
       this._config = this._getConfig(config);
       this._element = element;
-      this._input = document.querySelector(config.input);
+      this._input = config.input;
       this._timer = null;
       this._lastQuery = null;
+      if (typeof config.input === 'string') this._input = document.querySelector(config.input);
 
       this._addElementListener();
 
