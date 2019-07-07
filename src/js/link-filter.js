@@ -1,6 +1,7 @@
 /**
  * --------------------------------------------------------------------------
  * Link Filter (v0.0.1): link-filter.js
+ * Licensed under MIT (https://github.com/iqbalfn/link-filter/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
 
